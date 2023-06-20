@@ -16,7 +16,7 @@ func saveUser(c echo.Context) error {
 		return err
 	}
 
-	return c.XML(http.StatusCreated, u)
+	return c.JSON(http.StatusCreated, u)
 }
 
 func main() {
