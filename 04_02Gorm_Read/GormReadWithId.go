@@ -26,15 +26,12 @@ func main() {
 	}
 
 	//Insert
-	//db.Table("person").Create(&Person{Id: 7, FirstName: "javad", LastName: "razavi"})
+	//db.Table("person").Create(&Person{Id: 6, FirstName: "javad", LastName: "razavi"})
 
 	//Read
 	var person Person
-	db.Table("person").First(&person, "firstname = 'arman'")
-	//Query :
-	// SELECT * FROM "person" WHERE firstname = 'arman' ORDER BY "person"."id" LIMIT 1
+	db.Table("person").First(&person, 4)
 	fmt.Println(person.Id)
 	fmt.Println(person.FirstName)
 	fmt.Println(person.LastName)
-
 }
