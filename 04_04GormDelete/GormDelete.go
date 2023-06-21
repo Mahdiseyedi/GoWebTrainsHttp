@@ -7,6 +7,8 @@ import (
 	"log"
 )
 
+//https://gorm.io/docs/models.html#Fields-Tags
+
 type Person struct {
 	Id        int    `gorm:"column:id"`
 	FirstName string `gorm:"column:firstname"`

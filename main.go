@@ -28,27 +28,20 @@ func main() {
 	//Insert
 	//db.Table("person").Create(&Person{Id: 5, FirstName: "kave", LastName: "Ahani"})
 
-	//Read
-	//var person Person
-	//db.Table("person").First(&person, "firstname = 'arman'")
-	////Query :
-	//// SELECT * FROM "person" WHERE firstname = 'arman' ORDER BY "person"."id" LIMIT 1
-	//fmt.Println(person.Id)
-	//fmt.Println(person.FirstName)
-	//fmt.Println(person.LastName)
-
-	//Update
-	//db.Table("person").Model(&person).Update("lastname", "akbari")
-	//db.Table("person").Model(&person).Updates(Person{FirstName: "mohammad", LastName: "seyedi"})
-	//fmt.Println(person.Id)
-	//fmt.Println(person.FirstName)
-	//fmt.Println(person.LastName)
-
-	//Delete, both worked !
-	var person Person
-	//db.Table("person").Delete(&person, 5)
-	db.Table("person").Model(&person).Delete(&person, 5)
-	fmt.Println(person.Id)
-	fmt.Println(person.FirstName)
-	fmt.Println(person.LastName)
+	//bulk-insert
+	persons := []*Person{
+		&Person{Id: 7, FirstName: "kevin", LastName: "anderson"},
+		&Person{Id: 8, FirstName: "john", LastName: "wick"},
+		&Person{Id: 9, FirstName: "alex", LastName: "jude"},
+		&Person{Id: 10, FirstName: "rose", LastName: "peterson"},
+	}
+	//
+	//persons := []Person{
+	//	Person{Id: 11, FirstName: "kevin", LastName: "anderson"},
+	//	Person{Id: 12, FirstName: "john", LastName: "wick"},
+	//	Person{Id: 13, FirstName: "alex", LastName: "jude"},
+	//	Person{Id: 14, FirstName: "rose", LastName: "peterson"},
+	//}
+	res := db.Table("person").Create(persons)
+	fmt.Println(res)
 }
