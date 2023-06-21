@@ -37,6 +37,4 @@ func main() {
 		CreditCard: CreditCard{Number: "6037998023134025"},
 	})
 	fmt.Println(res.Error)
-	fmt.Println(res.RowsAffected)
-	fmt.Println(res.Logger)
 }
