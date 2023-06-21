@@ -1,28 +1,28 @@
 package main
 
 import (
-	"github.com/labstack/echo/v4"
-	"net/http"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+	"log"
 )
 
-type User struct {
-	Name   string `json:"name" xml:"name" form:"name" query:"name"`
-	Family string `json:"family" xml:"family" form:"family" query:"family"`
-}
-
-func saveUser(c echo.Context) error {
-	u := new(User)
-	if err := c.Bind(u); err != nil {
-		return err
-	}
-
-	return c.XML(http.StatusCreated, u)
+type Person struct {
+	Id        int    `gorm:"column:id"`
+	FirstName string `gorm:"column:firstname"`
+	LastName  string `gorm:"column:lastname"`
 }
 
 func main() {
-	e := echo.New()
+	dsn := "host=localhost user=mahdi password=123456 dbname=test port=5432 sslmode=disable client_encoding=UTF8"
+	db, err3 := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err3 != nil {
+		log.Fatalln(err3)
+	}
 
-	e.POST("/users", saveUser)
+	err2 := db.AutoMigrate(&Person{})
+	if err2 != nil {
+		log.Fatalln(err2)
+	}
 
-	e.Logger.Fatal(e.Start(":1323"))
+	db.Table("person").Create(&Person{Id: 6, FirstName: "javad", LastName: "razavi"})
 }
