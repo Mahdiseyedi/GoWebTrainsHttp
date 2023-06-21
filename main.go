@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
@@ -24,5 +25,13 @@ func main() {
 		log.Fatalln(err2)
 	}
 
-	db.Table("person").Create(&Person{Id: 6, FirstName: "javad", LastName: "razavi"})
+	//Insert
+	//db.Table("person").Create(&Person{Id: 6, FirstName: "javad", LastName: "razavi"})
+
+	//Read
+	var person Person
+	db.Table("person").First(&person, 4)
+	fmt.Println(person.Id)
+	fmt.Println(person.FirstName)
+	fmt.Println(person.LastName)
 }
